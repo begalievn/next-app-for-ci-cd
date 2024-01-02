@@ -4,9 +4,17 @@ on:
     branches:
       - main
 jobs:
-  build:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a command
+        run: echo Test
+
+  deploy:
     name: Build
     runs-on: ubuntu-latest
+    if: github.event.name == 'push' && github.event.ref == 'refs/heads/main'
     steps:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
