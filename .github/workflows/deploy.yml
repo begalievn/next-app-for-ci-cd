@@ -29,3 +29,14 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           sh /srv/www/staging.noomna.com/htdocs/sleep-stories-frontend/release.sh
+
+  deploy_for_staging:
+    name: Deploy for staging
+#    if: github.event_name == 'push' && github.event.ref == 'refs/heads/development'
+    environment: Staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test environment
+        run: |
+          echo Staging
+          echo '${secrets.SSH_USER}'
