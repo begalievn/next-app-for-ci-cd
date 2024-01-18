@@ -39,4 +39,4 @@ jobs:
       - name: Test environment
         run: |
           echo Staging
-          echo ${secrets.SSH_USER}
+          echo ${{secrets.SSH_USER}}
