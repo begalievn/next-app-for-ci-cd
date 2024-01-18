@@ -39,10 +39,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Use staging secret in an environment variable
-        run: echo "API_KEY=${{ secrets.STAGING_API_KEY }}" >> $GITHUB_ENV
+      - name: Run staging script
+        run: sh ${{ secrets.PATH }}
 
-      - name: Deploy to Staging
-        run: ./deploy.sh
-        env:
-          API_KEY: ${{ secrets.STAGING_API_KEY }}
+  deploy_for_production:
+    name: Deploy for production
+    #    if: github.event_name == 'push' && github.event.ref == 'refs/heads/development'
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run production script
+        run: sh ${{ secrets.PATH }}
