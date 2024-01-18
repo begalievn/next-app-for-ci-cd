@@ -29,3 +29,30 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           sh /srv/www/staging.noomna.com/htdocs/sleep-stories-frontend/release.sh
+
+  deploy_for_staging:
+    name: Deploy for staging
+#    if: github.event_name == 'push' && github.event.ref == 'refs/heads/development'
+    environment: Staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Tech echo command
+        run: echo key ${{ secrets.PATH }}
+
+      - name: Run staging script
+        run: sh ${{ secrets.PATH }}
+
+  deploy_for_production:
+    name: Deploy for production
+    #    if: github.event_name == 'push' && github.event.ref == 'refs/heads/development'
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run production script
+        run: sh ${{ secrets.PATH }}
