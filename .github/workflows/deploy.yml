@@ -39,6 +39,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Tech echo command
+        run: echo key ${{ secrets.PATH }}
+
       - name: Run staging script
         run: sh ${{ secrets.PATH }}
 
