@@ -36,7 +36,13 @@ jobs:
     environment: Staging
     runs-on: ubuntu-latest
     steps:
-      - name: Test environment
-        run: |
-          echo Staging
-          echo ${{secrets.SSH_USER}}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use staging secret in an environment variable
+        run: echo "API_KEY=${{ secrets.STAGING_API_KEY }}" >> $GITHUB_ENV
+
+      - name: Deploy to Staging
+        run: ./deploy.sh
+        env:
+          API_KEY: ${{ secrets.STAGING_API_KEY }}
